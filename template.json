@@ -1,0 +1,40 @@
+{
+    "defaultEnvironment": {
+        "additionalExperiments": [
+            "use_runner_v2"
+        ],
+        "ipConfiguration": "WORKER_IP_PRIVATE",
+        "subnetwork": "https://www.googleapis.com/compute/v1/projects/{{GCP_PROJECT}}/regions/europe-southwest1/subnetworks/europe-southwest1-network-{{ENV}}",
+        "machineType": "n2d-highmem-2",
+        "maxWorkers": 30,
+        "stagingLocation": "gs://{{GCP_PROJECT}}-dataflow-{{ENV}}/staging/",
+        "tempLocation": "gs://{{GCP_PROJECT}}-dataflow-{{ENV}}/temp/",
+        "workerRegion": "europe-southwest1",
+        "serviceAccountEmail": "sa-dataflow-etl-{{ENV}}@{{GCP_PROJECT}}.iam.gserviceaccount.com"
+    },
+    "image": "gcr.io/{{GCP_REPO}}/dataflow:latest",
+    "metadata": {
+        "description": "An Apache Beam pipeline that reads files from Google Cloud Storage and writes them into BigQuery.",
+        "name": "Files to BigQuery",
+        "parameters": [
+            {
+                "helpText": "BQ dataset path",
+                "label": "BigQuery Dataset name input.",
+                "name": "bq_path"
+            },
+            {
+                "helpText": "GCS Dataflow Staging",
+                "label": "GCloud Storage Dataflow staging bucket name input.",
+                "name": "dataflow_bucket"
+            },
+            {
+                "helpText": "Path to GCS folder.",
+                "label": "Google Cloud Storage folder input.",
+                "name": "gcs_url"
+            }
+        ]
+    },
+    "sdkInfo": {
+        "language": "PYTHON"
+    }
+}
